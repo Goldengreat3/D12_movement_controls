@@ -36,8 +36,11 @@ private slots:
 
     //void on_lineEdit_3_returnPressed();
 
+    void on_ArmBaseAngleInput_returnPressed();
+
 private:
     Ui::MainWindow *ui;
+    double base_degree;
 };
 
 #endif // MAINWINDOW_H

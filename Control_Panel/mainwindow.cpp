@@ -4,11 +4,14 @@
 #include <QString>
 #include <QLCDNumber>
 #include <Qframe>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    base_degree = 0;
+
     ui->setupUi(this);
 }
 
@@ -60,3 +63,11 @@ void MainWindow::on_actionExit_triggered()
     close();
 }
 
+
+void MainWindow::on_ArmBaseAngleInput_returnPressed()
+{
+    base_degree = base_degree + ui->ArmBaseAngleInput->text().toDouble();
+    ui->lcdNumber->display(base_degree);
+
+    qDebug() << base_degree;
+}

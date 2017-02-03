@@ -44,20 +44,20 @@ public:
     QWidget *ArmPage;
     QWidget *gridLayoutWidget;
     QGridLayout *gridLayout;
-    QLineEdit *lineEdit_7;
+    QLineEdit *PlatformUpDownInput;
     QPushButton *pushButton;
     QPushButton *pushButton_2;
     QLabel *label_8;
     QPushButton *pushButton_3;
-    QLineEdit *lineEdit_5;
+    QLineEdit *ArmJoint2AngleInput;
     QLabel *label_10;
     QLabel *label_5;
     QLabel *label_6;
     QLabel *label_9;
     QLabel *label_4;
-    QLineEdit *lineEdit_3;
-    QLineEdit *lineEdit_4;
-    QLineEdit *lineEdit_6;
+    QLineEdit *ArmBaseAngleInput;
+    QLineEdit *ArmJoint1AngleInput;
+    QLineEdit *PlatformLeftRightInput;
     QPushButton *pushButton_4;
     QLabel *label;
     QLabel *label_7;
@@ -130,10 +130,10 @@ public:
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
-        lineEdit_7 = new QLineEdit(gridLayoutWidget);
-        lineEdit_7->setObjectName(QStringLiteral("lineEdit_7"));
+        PlatformUpDownInput = new QLineEdit(gridLayoutWidget);
+        PlatformUpDownInput->setObjectName(QStringLiteral("PlatformUpDownInput"));
 
-        gridLayout->addWidget(lineEdit_7, 6, 1, 1, 1);
+        gridLayout->addWidget(PlatformUpDownInput, 6, 1, 1, 1);
 
         pushButton = new QPushButton(gridLayoutWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
@@ -155,10 +155,10 @@ public:
 
         gridLayout->addWidget(pushButton_3, 2, 2, 1, 1);
 
-        lineEdit_5 = new QLineEdit(gridLayoutWidget);
-        lineEdit_5->setObjectName(QStringLiteral("lineEdit_5"));
+        ArmJoint2AngleInput = new QLineEdit(gridLayoutWidget);
+        ArmJoint2AngleInput->setObjectName(QStringLiteral("ArmJoint2AngleInput"));
 
-        gridLayout->addWidget(lineEdit_5, 2, 1, 1, 1);
+        gridLayout->addWidget(ArmJoint2AngleInput, 2, 1, 1, 1);
 
         label_10 = new QLabel(gridLayoutWidget);
         label_10->setObjectName(QStringLiteral("label_10"));
@@ -185,20 +185,20 @@ public:
 
         gridLayout->addWidget(label_4, 4, 3, 1, 1);
 
-        lineEdit_3 = new QLineEdit(gridLayoutWidget);
-        lineEdit_3->setObjectName(QStringLiteral("lineEdit_3"));
+        ArmBaseAngleInput = new QLineEdit(gridLayoutWidget);
+        ArmBaseAngleInput->setObjectName(QStringLiteral("ArmBaseAngleInput"));
 
-        gridLayout->addWidget(lineEdit_3, 0, 1, 1, 1);
+        gridLayout->addWidget(ArmBaseAngleInput, 0, 1, 1, 1);
 
-        lineEdit_4 = new QLineEdit(gridLayoutWidget);
-        lineEdit_4->setObjectName(QStringLiteral("lineEdit_4"));
+        ArmJoint1AngleInput = new QLineEdit(gridLayoutWidget);
+        ArmJoint1AngleInput->setObjectName(QStringLiteral("ArmJoint1AngleInput"));
 
-        gridLayout->addWidget(lineEdit_4, 1, 1, 1, 1);
+        gridLayout->addWidget(ArmJoint1AngleInput, 1, 1, 1, 1);
 
-        lineEdit_6 = new QLineEdit(gridLayoutWidget);
-        lineEdit_6->setObjectName(QStringLiteral("lineEdit_6"));
+        PlatformLeftRightInput = new QLineEdit(gridLayoutWidget);
+        PlatformLeftRightInput->setObjectName(QStringLiteral("PlatformLeftRightInput"));
 
-        gridLayout->addWidget(lineEdit_6, 4, 1, 1, 1);
+        gridLayout->addWidget(PlatformLeftRightInput, 4, 1, 1, 1);
 
         pushButton_4 = new QPushButton(gridLayoutWidget);
         pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
@@ -361,7 +361,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(0);
+        stackedWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -380,6 +380,7 @@ public:
         pushButton_2->setText(QApplication::translate("MainWindow", "Execute", Q_NULLPTR));
         label_8->setText(QApplication::translate("MainWindow", "Arm Joint #2 Rotation", Q_NULLPTR));
         pushButton_3->setText(QApplication::translate("MainWindow", "Execute", Q_NULLPTR));
+        ArmJoint2AngleInput->setText(QString());
         label_10->setText(QApplication::translate("MainWindow", "Platform Up/Down", Q_NULLPTR));
         label_5->setText(QApplication::translate("MainWindow", "Position:", Q_NULLPTR));
         label_6->setText(QApplication::translate("MainWindow", "Arm Base Rotation", Q_NULLPTR));
