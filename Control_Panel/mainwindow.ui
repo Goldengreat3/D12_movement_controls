@@ -26,6 +26,47 @@
     <property name="currentIndex">
      <number>0</number>
     </property>
+    <widget class="QWidget" name="page">
+     <widget class="QPushButton" name="pushButton_8">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>50</y>
+        <width>191</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Reset to Default Arm Position</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_9">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>90</y>
+        <width>191</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Emergency Stop</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_10">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>130</y>
+        <width>191</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Self Destruct</string>
+      </property>
+     </widget>
+    </widget>
     <widget class="QWidget" name="ArmPage">
      <widget class="QWidget" name="gridLayoutWidget">
       <property name="geometry">
@@ -37,40 +78,44 @@
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="lineEdit_4"/>
+       <item row="6" column="1">
+        <widget class="QLineEdit" name="lineEdit_7"/>
        </item>
-       <item row="4" column="1">
-        <widget class="QLineEdit" name="lineEdit_6"/>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEdit_3"/>
-       </item>
-       <item row="4" column="2">
-        <widget class="QPushButton" name="pushButton_4">
+       <item row="0" column="2">
+        <widget class="QPushButton" name="pushButton">
          <property name="text">
           <string>Execute</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="3">
-        <widget class="QLabel" name="label">
+       <item row="1" column="2">
+        <widget class="QPushButton" name="pushButton_2">
          <property name="text">
-          <string>Position:</string>
+          <string>Execute</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_7">
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_8">
          <property name="text">
-          <string>Arm Joint #1 Rotation</string>
+          <string>Arm Joint #2 Rotation</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="3">
-        <widget class="QLabel" name="label_4">
+       <item row="2" column="2">
+        <widget class="QPushButton" name="pushButton_3">
          <property name="text">
-          <string>Position:</string>
+          <string>Execute</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="lineEdit_5"/>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="label_10">
+         <property name="text">
+          <string>Platform Up/Down</string>
          </property>
         </widget>
        </item>
@@ -95,46 +140,49 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="2">
-        <widget class="QPushButton" name="pushButton">
+       <item row="4" column="3">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Position:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="lineEdit_3"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="lineEdit_4"/>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLineEdit" name="lineEdit_6"/>
+       </item>
+       <item row="4" column="2">
+        <widget class="QPushButton" name="pushButton_4">
          <property name="text">
           <string>Execute</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="lineEdit_5"/>
-       </item>
-       <item row="1" column="2">
-        <widget class="QPushButton" name="pushButton_2">
+       <item row="0" column="3">
+        <widget class="QLabel" name="label">
          <property name="text">
-          <string>Execute</string>
+          <string>Position:</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_8">
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_7">
          <property name="text">
-          <string>Arm Joint #2 Rotation</string>
+          <string>Arm Joint #1 Rotation</string>
          </property>
         </widget>
        </item>
-       <item row="6" column="0">
-        <widget class="QLabel" name="label_10">
+       <item row="2" column="3">
+        <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>Platform Up/Down</string>
+          <string>Position:</string>
          </property>
         </widget>
-       </item>
-       <item row="2" column="2">
-        <widget class="QPushButton" name="pushButton_3">
-         <property name="text">
-          <string>Execute</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="1">
-        <widget class="QLineEdit" name="lineEdit_7"/>
        </item>
        <item row="1" column="3">
         <widget class="QLabel" name="label_2">
@@ -150,12 +198,20 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="3">
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string>Position:</string>
-         </property>
-        </widget>
+       <item row="0" column="4">
+        <widget class="QLCDNumber" name="lcdNumber"/>
+       </item>
+       <item row="1" column="4">
+        <widget class="QLCDNumber" name="lcdNumber_2"/>
+       </item>
+       <item row="2" column="4">
+        <widget class="QLCDNumber" name="lcdNumber_3"/>
+       </item>
+       <item row="4" column="4">
+        <widget class="QLCDNumber" name="lcdNumber_4"/>
+       </item>
+       <item row="6" column="4">
+        <widget class="QLCDNumber" name="lcdNumber_5"/>
        </item>
       </layout>
      </widget>
@@ -171,8 +227,12 @@
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="lineEdit"/>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_12">
+         <property name="text">
+          <string>Reel</string>
+         </property>
+        </widget>
        </item>
        <item row="1" column="2">
         <widget class="QPushButton" name="pushButton_6">
@@ -181,10 +241,23 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_12">
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="lineEdit"/>
+       </item>
+       <item row="2" column="2">
+        <widget class="QPushButton" name="pushButton_7">
          <property name="text">
-          <string>Reel</string>
+          <string>Execute</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="lineEdit_2"/>
+       </item>
+       <item row="2" column="3">
+        <widget class="QLabel" name="label_15">
+         <property name="text">
+          <string>Reel Distance</string>
          </property>
         </widget>
        </item>
@@ -195,29 +268,18 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="lineEdit_2"/>
-       </item>
-       <item row="2" column="2">
-        <widget class="QPushButton" name="pushButton_7">
-         <property name="text">
-          <string>Execute</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="3">
-        <widget class="QLabel" name="label_15">
-         <property name="text">
-          <string>Reel Distance</string>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="3">
         <widget class="QLabel" name="label_16">
          <property name="text">
           <string>Explorer Distance</string>
          </property>
         </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="QLCDNumber" name="lcdNumber_6"/>
+       </item>
+       <item row="2" column="4">
+        <widget class="QLCDNumber" name="lcdNumber_7"/>
        </item>
       </layout>
      </widget>
@@ -234,21 +296,21 @@
     </property>
     <layout class="QGridLayout" name="gridLayout_3">
      <item row="0" column="2">
-      <widget class="QPushButton" name="pushButton_8">
+      <widget class="QPushButton" name="ExplorerReelButton">
        <property name="text">
         <string>Explorer/Reel</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QPushButton" name="pushButton_9">
+      <widget class="QPushButton" name="ArmButton">
        <property name="text">
         <string>Arm</string>
        </property>
       </widget>
      </item>
      <item row="0" column="0">
-      <widget class="QPushButton" name="pushButton_10">
+      <widget class="QPushButton" name="HomeButton">
        <property name="text">
         <string>Home</string>
        </property>
@@ -266,6 +328,15 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Info</string>
+    </property>
+    <addaction name="actionAbout"/>
+    <addaction name="actionHelp"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -276,6 +347,21 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="text">
+    <string>Help</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
