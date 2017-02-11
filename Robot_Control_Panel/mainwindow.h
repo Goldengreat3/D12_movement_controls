@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+
+
 namespace Ui {
 class MainWindow;
 }
@@ -38,6 +40,10 @@ private slots:
 
     void on_ManualPushButton_clicked();
 
+    void Stall();
+    void unStall();
+    void update();
+    void Progress();
 private:
     Ui::MainWindow *ui;
     double BaseValue;
@@ -61,6 +67,9 @@ private:
     double ExplorerLowerLimit;
     double ReelLowerLimit;
     int Timer;
+    double MaxStep;
+    QString RotationInputLimits;
+    QTimer *timer;
 };
 
 #endif // MAINWINDOW_H

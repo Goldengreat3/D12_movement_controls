@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="Home">
      <attribute name="title">
@@ -88,6 +88,13 @@
          </property>
         </widget>
        </item>
+       <item row="5" column="2">
+        <widget class="QPushButton" name="WristUDExecute">
+         <property name="text">
+          <string>Execute</string>
+         </property>
+        </widget>
+       </item>
        <item row="2" column="2">
         <widget class="QPushButton" name="LowerJointExecute">
          <property name="text">
@@ -109,10 +116,16 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="2">
-        <widget class="QPushButton" name="WristUDExecute">
+       <item row="0" column="1">
+        <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Execute</string>
+          <string>Rotation In steps              (1.8° Per Step) Max = MAXVALUEPOSSIBLE</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -120,26 +133,6 @@
         <widget class="QLabel" name="label">
          <property name="text">
           <string>Joint</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>Rotation(Degrees)</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_5">
-         <property name="text">
-          <string>Base</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -159,10 +152,20 @@
        <item row="1" column="1">
         <widget class="QSpinBox" name="BaseInput">
          <property name="minimum">
-          <number>-90</number>
+          <number>-5</number>
          </property>
          <property name="maximum">
-          <number>90</number>
+          <number>5</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>Base</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -196,6 +199,16 @@
          </property>
         </widget>
        </item>
+       <item row="4" column="1">
+        <widget class="QSpinBox" name="WristLRInput">
+         <property name="minimum">
+          <number>-5</number>
+         </property>
+         <property name="maximum">
+          <number>5</number>
+         </property>
+        </widget>
+       </item>
        <item row="3" column="0">
         <widget class="QLabel" name="label_7">
          <property name="text">
@@ -203,46 +216,6 @@
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="1">
-        <widget class="QSpinBox" name="WristLRInput">
-         <property name="minimum">
-          <number>-90</number>
-         </property>
-         <property name="maximum">
-          <number>90</number>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="1">
-        <widget class="QSpinBox" name="WristUDInput">
-         <property name="minimum">
-          <number>-90</number>
-         </property>
-         <property name="maximum">
-          <number>90</number>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QSpinBox" name="LowerJointInput">
-         <property name="minimum">
-          <number>-90</number>
-         </property>
-         <property name="maximum">
-          <number>90</number>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QSpinBox" name="UpperJointInput">
-         <property name="minimum">
-          <number>-90</number>
-         </property>
-         <property name="maximum">
-          <number>90</number>
          </property>
         </widget>
        </item>
@@ -265,6 +238,36 @@
          </property>
          <property name="segmentStyle">
           <enum>QLCDNumber::Flat</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QSpinBox" name="UpperJointInput">
+         <property name="minimum">
+          <number>-5</number>
+         </property>
+         <property name="maximum">
+          <number>5</number>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QSpinBox" name="WristUDInput">
+         <property name="minimum">
+          <number>-5</number>
+         </property>
+         <property name="maximum">
+          <number>5</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QSpinBox" name="LowerJointInput">
+         <property name="minimum">
+          <number>-5</number>
+         </property>
+         <property name="maximum">
+          <number>5</number>
          </property>
         </widget>
        </item>
@@ -320,7 +323,7 @@
        </rect>
       </property>
       <property name="maximum">
-       <number>10000</number>
+       <number>100</number>
       </property>
       <property name="value">
        <number>0</number>
@@ -418,20 +421,20 @@
        <item row="2" column="1">
         <widget class="QSpinBox" name="ExplorerInput">
          <property name="minimum">
-          <number>-100</number>
+          <number>-10</number>
          </property>
          <property name="maximum">
-          <number>100</number>
+          <number>10</number>
          </property>
         </widget>
        </item>
        <item row="3" column="1">
         <widget class="QSpinBox" name="ReelInput">
          <property name="minimum">
-          <number>-100</number>
+          <number>-10</number>
          </property>
          <property name="maximum">
-          <number>100</number>
+          <number>10</number>
          </property>
         </widget>
        </item>
@@ -465,10 +468,10 @@
        <item row="1" column="1">
         <widget class="QSpinBox" name="CoordinatedInput">
          <property name="minimum">
-          <number>-100</number>
+          <number>-10</number>
          </property>
          <property name="maximum">
-          <number>100</number>
+          <number>10</number>
          </property>
         </widget>
        </item>

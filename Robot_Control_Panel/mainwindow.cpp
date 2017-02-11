@@ -2,6 +2,10 @@
 #include "ui_mainwindow.h"
 #include <QMessageBox>
 #include <Qfile>
+#include <QThread>
+#include <QTimer>
+
+bool global_stall = false;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -26,9 +30,15 @@ MainWindow::MainWindow(QWidget *parent) :
     WristUDLowerLimit = -90;
     ExplorerLowerLimit = 0;
     ReelLowerLimit = 0;
+    MaxStep = '5';
     Check = 0;
-
+    RotationInputLimits += "Steps \n (1.8° Per Step)";
+    RotationInputLimits += MaxStep;
     ui->setupUi(this);
+    ui->label_2->setText(RotationInputLimits);
+    timer = new QTimer(this);
+
+
 }
 
 MainWindow::~MainWindow()
@@ -38,21 +48,23 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_BaseExecute_clicked()
 {
-    Check = 0;
-    Check = BaseValue + ui->BaseInput->value();
-    if (Check>BaseUpperLimit || Check<BaseLowerLimit) {
-    QMessageBox msgBox;
-    msgBox.setText("That Value Exceeds Current Limits on Device.");
-    msgBox.exec();
-    } else {
-    BaseValue = BaseValue + ui->BaseInput->value();
-    ui->BaseLCD->display(BaseValue);
-    ui->BaseInput->setValue(0);
-
-    ui->ArmProgressBar->setValue(0);
-    Timer = 0;
-    for (Timer = 0; Timer <= 10000; Timer++)
-        ui->ArmProgressBar->setValue(Timer);
+    if(!global_stall)
+    {
+        Check = 0;
+        Check = BaseValue + ui->BaseInput->value();
+        if (Check>BaseUpperLimit || Check<BaseLowerLimit)
+        {
+            QMessageBox msgBox;
+            msgBox.setText("That Value Exceeds Current Limits on Device.");
+            msgBox.exec();
+        }
+        else
+        {
+            BaseValue = BaseValue + ui->BaseInput->value();
+            ui->BaseLCD->display(BaseValue);
+            ui->BaseInput->setValue(0);
+        }
+        Progress();
     }
 }
 
@@ -265,3 +277,57 @@ void MainWindow::on_ManualPushButton_clicked()
     QFile file("file///C:/Users/Austin/Documents/EE416_Code/D12_movement_controls/Control_Panel/Manual.txt");
 }
 
+void MainWindow::Stall()
+{
+    blockSignals(true);
+    ui->BaseExecute->hide();
+    ui->BaseInput->setEnabled(false);
+    global_stall = true;
+
+}
+/*
+void MainWindow::Progress()
+{
+    Check = 0;
+    Timer = 0;
+
+    ui->ArmProgressBar->setValue(0);
+    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+
+    for(Timer = 0; Timer < 100; Timer++)
+    {
+     timer->start(50);
+    }
+
+    disconnect(timer, SIGNAL(timeout()), this, SLOT(update()));
+}
+*/
+
+void MainWindow::Progress()
+{
+    if(!global_stall)
+    {
+        Stall();
+        for(int i = 1; i < 6; i++)
+        {
+            ui->ArmProgressBar->setValue(i*20);
+            QThread::sleep(1);
+        }
+        unStall();
+    }
+}
+
+void MainWindow::unStall()
+{
+    blockSignals(false);
+    ui->BaseExecute->show();
+    ui->BaseInput->setEnabled(true);
+    global_stall = false;
+}
+
+void MainWindow::update()
+{
+    Check = Check + 1;
+    ui->ArmProgressBar->setValue(Check);
+
+}
