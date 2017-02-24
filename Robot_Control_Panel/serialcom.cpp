@@ -1,13 +1,13 @@
 #include "serialcom.h"
 
-serialCom::serialCom(char *portName)
+serialCom::serialCom(char* portName)
 {
     //We're not yet connected
     this->connected = false;
 
     //Try to connect to the given port throuh CreateFile
-    this->hSerial = CreateFile(portName,
-            GENERIC_READ | GENERIC_WRITE,
+    this->hSerial = CreateFile((LPCWSTR)portName,
+            GENERIC_WRITE,
             0,
             NULL,
             OPEN_EXISTING,
@@ -63,7 +63,7 @@ serialCom::serialCom(char *portName)
                  //Flush any remaining characters in the buffers
                  PurgeComm(this->hSerial, PURGE_RXCLEAR | PURGE_TXCLEAR);
                  //We wait 2s as the arduino board will be reseting
-                 Sleep(ARDUINO_WAIT_TIME);
+                 Sleep(2);//ARDUINO_WAIT_TIME);
              }
         }
     }
