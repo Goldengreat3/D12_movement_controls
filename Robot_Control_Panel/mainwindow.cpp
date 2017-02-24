@@ -48,7 +48,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_BaseExecute_clicked()
 {
-    if(!global_stall)
+    if(ui->BaseInput->value() != 0)
     {
         Check = 0;
         Check = BaseValue + ui->BaseInput->value();
@@ -70,155 +70,187 @@ void MainWindow::on_BaseExecute_clicked()
 
 void MainWindow::on_LowerJointExecute_clicked()
 {
-    Check = 0;
-    Check = LowerJointValue + ui->LowerJointInput->value();
-    if (Check>LowerJointUpperLimit || Check<LowerJointLowerLimit) {
-    QMessageBox msgBox;
-    msgBox.setText("That Value Exceeds Current Limits on Device.");
-    msgBox.exec();
-    } else {
-    LowerJointValue = LowerJointValue + ui->LowerJointInput->value();
-    ui->LowerJointLCD->display(LowerJointValue);
-    ui->LowerJointInput->setValue(0);
+    if(ui->LowerJointInput->value() != 0)
+    {
+        Check = 0;
+        Check = LowerJointValue + ui->LowerJointInput->value();
+        if (Check>LowerJointUpperLimit || Check<LowerJointLowerLimit)
+        {
+            QMessageBox msgBox;
+            msgBox.setText("That Value Exceeds Current Limits on Device.");
+            msgBox.exec();
+        }
+        else
+        {
+            LowerJointValue = LowerJointValue + ui->LowerJointInput->value();
+            ui->LowerJointLCD->display(LowerJointValue);
+            ui->LowerJointInput->setValue(0);
 
-    ui->ArmProgressBar->setValue(0);
-    Timer = 0;
-    for (Timer = 0; Timer <= 10000; Timer++)
-        ui->ArmProgressBar->setValue(Timer);
+            ui->ArmProgressBar->setValue(0);
+            Progress();
+        }
     }
 }
 
 
 void MainWindow::on_UpperJointExecute_clicked()
 {
-    Check = 0;
-    Check = UpperJointValue + ui->UpperJointInput->value();
-    if (Check>UpperJointUpperLimit || Check<UpperJointLowerLimit) {
-    QMessageBox msgBox;
-    msgBox.setText("That Value Exceeds Current Limits on Device.");
-    msgBox.exec();
-    } else {
-    UpperJointValue = UpperJointValue + ui->UpperJointInput->value();
-    ui->UpperJointLCD->display(UpperJointValue);
-    ui->UpperJointInput->setValue(0);
+    if(ui->UpperJointInput->value() != 0)
+    {
+        Check = 0;
+        Check = UpperJointValue + ui->UpperJointInput->value();
+        if (Check>UpperJointUpperLimit || Check<UpperJointLowerLimit)
+        {
+            QMessageBox msgBox;
+            msgBox.setText("That Value Exceeds Current Limits on Device.");
+            msgBox.exec();
+        }
+        else
+        {
+            UpperJointValue = UpperJointValue + ui->UpperJointInput->value();
+            ui->UpperJointLCD->display(UpperJointValue);
+            ui->UpperJointInput->setValue(0);
 
-    ui->ArmProgressBar->setValue(0);
-    Timer = 0;
-    for (Timer = 0; Timer <= 10000; Timer++)
-        ui->ArmProgressBar->setValue(Timer);
+            ui->ArmProgressBar->setValue(0);
+            Progress();
+        }
     }
 }
 
 void MainWindow::on_WristLRExecute_clicked()
 {
-    Check = 0;
-    Check = WristLRValue + ui->WristLRInput->value();
-    if (Check>WristLRUpperLimit || Check<WristLRLowerLimit) {
-    QMessageBox msgBox;
-    msgBox.setText("That Value Exceeds Current Limits on Device.");
-    msgBox.exec();
-    } else {
-    WristLRValue = WristLRValue + ui->WristLRInput->value();
-    ui->WristLRLCD->display(WristLRValue);
-    ui->WristLRInput->setValue(0);
+    if(ui->WristLRInput->value() != 0)
+    {
+        Check = 0;
+        Check = WristLRValue + ui->WristLRInput->value();
+        if (Check>WristLRUpperLimit || Check<WristLRLowerLimit)
+        {
+            QMessageBox msgBox;
+            msgBox.setText("That Value Exceeds Current Limits on Device.");
+            msgBox.exec();
+        }
+        else
+        {
+            WristLRValue = WristLRValue + ui->WristLRInput->value();
+            ui->WristLRLCD->display(WristLRValue);
+            ui->WristLRInput->setValue(0);
 
-    ui->ArmProgressBar->setValue(0);
-    Timer = 0;
-    for (Timer = 0; Timer <= 10000; Timer++)
-        ui->ArmProgressBar->setValue(Timer);
+            ui->ArmProgressBar->setValue(0);
+            Progress();
+        }
     }
 }
 
 void MainWindow::on_WristUDExecute_clicked()
 {
-    Check = 0;
-    Check = WristUDValue + ui->WristUDInput->value();
-    if (Check>WristUDUpperLimit || Check<WristUDLowerLimit) {
-    QMessageBox msgBox;
-    msgBox.setText("That Value Exceeds Current Limits on Device.");
-    msgBox.exec();
-    } else {
-    WristUDValue = WristUDValue + ui->WristUDInput->value();
-    ui->WristUDLCD->display(WristUDValue);
-    ui->WristUDInput->setValue(0);
+    if(ui->WristUDInput->value() != 0)
+    {
+        Check = 0;
+        Check = WristUDValue + ui->WristUDInput->value();
+        if (Check>WristUDUpperLimit || Check<WristUDLowerLimit)
+        {
+            QMessageBox msgBox;
+            msgBox.setText("That Value Exceeds Current Limits on Device.");
+            msgBox.exec();
+        }
+        else
+        {
+            WristUDValue = WristUDValue + ui->WristUDInput->value();
+            ui->WristUDLCD->display(WristUDValue);
+            ui->WristUDInput->setValue(0);
 
-    ui->ArmProgressBar->setValue(0);
-    Timer = 0;
-    for (Timer = 0; Timer <= 10000; Timer++)
-        ui->ArmProgressBar->setValue(Timer);
+            ui->ArmProgressBar->setValue(0);
+            Progress();
+        }
     }
 }
 
 void MainWindow::on_ExplorerExecute_clicked()
 {
-    Check = 0;
-    Check = ExplorerValue + ui->ExplorerInput->value();
-    if (Check<ExplorerLowerLimit) {
-        QMessageBox msgBox;
-        msgBox.setText("That Value Exceeds Current Limits on Device.");
-        msgBox.exec();
-    } else {
-    ExplorerValue = ExplorerValue + ui->ExplorerInput->value();
-    ui->ExplorerLCD->display(ExplorerValue);
-    ui->ExplorerInput->setValue(0);
+    if(ui->ExplorerInput->value() != 0)
+    {
+        Check = 0;
+        Check = ExplorerValue + ui->ExplorerInput->value();
+        if (Check<ExplorerLowerLimit)
+        {
+            QMessageBox msgBox;
+            msgBox.setText("That Value Exceeds Current Limits on Device.");
+            msgBox.exec();
+        }
+        else
+        {
+            ExplorerValue = ExplorerValue + ui->ExplorerInput->value();
+            ui->ExplorerLCD->display(ExplorerValue);
+            ui->ExplorerInput->setValue(0);
 
-    ui->ExplorerProgressBar->setValue(0);
-    Timer = 0;
-    for (Timer = 0; Timer <= 10000; Timer++)
-        ui->ExplorerProgressBar->setValue(Timer);
+            ui->ExplorerProgressBar->setValue(0);
+            Progress();
+        }
     }
 }
 
 void MainWindow::on_ReelExecute_clicked()
 {
-    Check = ReelValue + ui->ReelInput->value();
-    if (Check<ExplorerLowerLimit || Check<ExplorerValue) {
-        QMessageBox msgBox;
-        msgBox.setText("That Value Exceeds Current Limits on Device.");
-        msgBox.exec();
-    } else {
-    Check = 0;
-    ReelValue = ReelValue + ui->ReelInput->value();
-    ui->ReelLCD->display(ReelValue);
-    ui->ReelInput->setValue(0);
+    if(ui->ReelInput->value() != 0)
+    {
+        Check = ReelValue + ui->ReelInput->value();
+        if (Check<ExplorerLowerLimit || Check<ExplorerValue)
+        {
+            QMessageBox msgBox;
+            msgBox.setText("That Value Exceeds Current Limits on Device.");
+            msgBox.exec();
+        }
+        else
+        {
+            Check = 0;
+            ReelValue = ReelValue + ui->ReelInput->value();
+            ui->ReelLCD->display(ReelValue);
+            ui->ReelInput->setValue(0);
 
-    ui->ExplorerProgressBar->setValue(0);
-    Timer = 0;
-    for (Timer = 0; Timer <= 10000; Timer++)
-        ui->ExplorerProgressBar->setValue(Timer);
+            ui->ExplorerProgressBar->setValue(0);
+            Progress();
+        }
     }
 }
 
 void MainWindow::on_CoordinatedExecute_clicked()
 {
-    Check = 0;
-    Check = ReelValue + ui->CoordinatedInput->value();
-    if (Check<ReelLowerLimit) {
-        QMessageBox msgBox;
-        msgBox.setText("That Value Exceeds Current Limits on Device. Refer to Instructions on Home Page.");
-        msgBox.exec();
-    } else {
-    ExplorerValue = ExplorerValue + ui->CoordinatedInput->value();
-    ReelValue = ReelValue + ui->CoordinatedInput->value();
-    if (ui->CoordinatedInput->value()>0) {
-    ui->ReelLCD->display(ReelValue);
-    ui->ExplorerLCD->display(ExplorerValue);
-    ui->CoordinatedInput->setValue(0);
+    if(ui->CoordinatedInput->value() != 0)
+    {
+        Check = 0;
+        Check = ReelValue + ui->CoordinatedInput->value();
+        if (Check<ReelLowerLimit)
+        {
+            QMessageBox msgBox;
+            msgBox.setText("That Value Exceeds Current Limits on Device. Refer to Instructions on Home Page.");
+            msgBox.exec();
+        }
+        else
+        {
+            ExplorerValue = ExplorerValue + ui->CoordinatedInput->value();
+            ReelValue = ReelValue + ui->CoordinatedInput->value();
+        }
+        if (ui->CoordinatedInput->value()>0)
+        {
+        ui->ReelLCD->display(ReelValue);
+        ui->ExplorerLCD->display(ExplorerValue);
+        ui->CoordinatedInput->setValue(0);
 
-    ui->ExplorerProgressBar->setValue(0);
-    Timer = 0;
-    for (Timer = 0; Timer <= 10000; Timer++)
-        ui->ExplorerProgressBar->setValue(Timer);
+        ui->ExplorerProgressBar->setValue(0);
+        Timer = 0;
+        for (Timer = 0; Timer <= 10000; Timer++)
+            ui->ExplorerProgressBar->setValue(Timer);
+        }
+        else
+        {
+                ui->ExplorerLCD->display(ExplorerValue);
+                ui->ReelLCD->display(ReelValue);
+                ui->CoordinatedInput->setValue(0);
 
-    } else {
-            ui->ExplorerLCD->display(ExplorerValue);
-            ui->ReelLCD->display(ReelValue);
-            ui->CoordinatedInput->setValue(0);
-
-            ui->ExplorerProgressBar->setValue(0);
-            Timer = 0;
-            for (Timer = 0; Timer <= 10000; Timer++)
-                ui->ExplorerProgressBar->setValue(Timer);
+                ui->ExplorerProgressBar->setValue(0);
+                Timer = 0;
+                for (Timer = 0; Timer <= 10000; Timer++)
+                    ui->ExplorerProgressBar->setValue(Timer);
         }
     }
 }
@@ -252,7 +284,6 @@ void MainWindow::on_ResetArmPushButton_clicked()
 
 
 
-    }else {
     }
 }
 
@@ -305,16 +336,14 @@ void MainWindow::Progress()
 
 void MainWindow::Progress()
 {
-    if(!global_stall)
+
+    Stall();
+    for(int i = 1; i < 101; i++)
     {
-        Stall();
-        for(int i = 1; i < 6; i++)
-        {
-            ui->ArmProgressBar->setValue(i*20);
-            QThread::sleep(1);
-        }
-        unStall();
+        ui->ArmProgressBar->setValue(i*1);
+        QThread::sleep(.2);
     }
+    unStall();
 }
 
 void MainWindow::unStall()
