@@ -2,6 +2,8 @@
 
 serialCom::serialCom(char* portName)
 {
+    printf("%s\n", portName);
+
     //We're not yet connected
     this->connected = false;
 
@@ -33,12 +35,13 @@ serialCom::serialCom(char* portName)
     {
         //If connected we try to set the comm parameters
         DCB dcbSerialParams = {0};
+        dcbSerialParams.DCBlength = sizeof(DCB);
 
         //Try to get the current
         if (!GetCommState(this->hSerial, &dcbSerialParams))
         {
             //If impossible, show an error
-            printf("failed to get current serial parameters!");
+            printf("failed to get current serial parameters!\n");
         }
         else
         {
@@ -47,6 +50,7 @@ serialCom::serialCom(char* portName)
             dcbSerialParams.ByteSize=8;
             dcbSerialParams.StopBits=ONESTOPBIT;
             dcbSerialParams.Parity=NOPARITY;
+
             //Setting the DTR to Control_Enable ensures that the Arduino is properly
             //reset upon establishing a connection
             dcbSerialParams.fDtrControl = DTR_CONTROL_ENABLE;
@@ -54,14 +58,16 @@ serialCom::serialCom(char* portName)
              //Set the parameters and check for their proper application
              if(!SetCommState(hSerial, &dcbSerialParams))
              {
-                printf("ALERT: Could not set Serial Port parameters");
+                printf("ALERT: Could not set Serial Port parameters\n");
              }
              else
              {
                  //If everything went fine we're connected
                  this->connected = true;
+
                  //Flush any remaining characters in the buffers
                  PurgeComm(this->hSerial, PURGE_RXCLEAR | PURGE_TXCLEAR);
+
                  //We wait 2s as the arduino board will be reseting
                  Sleep(2);//ARDUINO_WAIT_TIME);
              }
