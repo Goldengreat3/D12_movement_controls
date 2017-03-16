@@ -2,8 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
-
+#include "serialcom.h"
 
 namespace Ui {
 class MainWindow;
@@ -16,6 +15,9 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+    //Connects to the Arduino
+    bool Connect();
 
 private slots:
     void on_BaseExecute_clicked();
@@ -70,6 +72,9 @@ private:
     double MaxStep;
     QString RotationInputLimits;
     QTimer *timer;
+
+    serialCom* arduino;
+    bool connected;
 };
 
 #endif // MAINWINDOW_H

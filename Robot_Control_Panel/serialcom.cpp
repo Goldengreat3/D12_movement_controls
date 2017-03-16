@@ -1,15 +1,36 @@
 #include "serialcom.h"
 
+
+serialCom::serialCom()
+{
+    connected = false;
+}
+
 serialCom::serialCom(char* portName)
 {
-    printf("%s\n", portName);
+    this->connect(portName);
+}
 
+serialCom::~serialCom()
+{
+    //Check if we are connected before trying to disconnect
+    if(this->connected)
+    {
+        //We're no longer connected
+        this->connected = false;
+        //Close the serial handler
+        CloseHandle(this->hSerial);
+    }
+}
+
+void serialCom::connect(char* portName)
+{
     //We're not yet connected
     this->connected = false;
 
     //Try to connect to the given port throuh CreateFile
-    this->hSerial = CreateFile((LPCWSTR)portName,
-            GENERIC_WRITE,
+    this->hSerial = CreateFileA((LPCSTR)portName,
+            GENERIC_READ | GENERIC_WRITE,
             0,
             NULL,
             OPEN_EXISTING,
@@ -20,8 +41,8 @@ serialCom::serialCom(char* portName)
     if(this->hSerial==INVALID_HANDLE_VALUE)
     {
         //If not success full display an Error
-        if(GetLastError()==ERROR_FILE_NOT_FOUND){
-
+        if(GetLastError()==ERROR_FILE_NOT_FOUND)
+        {
             //Print Error if neccessary
             printf("ERROR: Handle was not attached. Reason: %s not available.\n", portName);
 
@@ -69,22 +90,48 @@ serialCom::serialCom(char* portName)
                  PurgeComm(this->hSerial, PURGE_RXCLEAR | PURGE_TXCLEAR);
 
                  //We wait 2s as the arduino board will be reseting
-                 Sleep(2);//ARDUINO_WAIT_TIME);
+                 Sleep(2000);//ARDUINO_WAIT_TIME);
              }
         }
     }
 }
 
-serialCom::~serialCom()
+int serialCom::readData(char *buffer, unsigned int nbChar)
 {
-    //Check if we are connected before trying to disconnect
-    if(this->connected)
+    //Number of bytes we'll have read
+    DWORD bytesRead;
+    //Number of bytes we'll really ask to read
+    unsigned int toRead;
+
+    //Use the ClearCommError function to get status info on the Serial port
+    ClearCommError(this->hSerial, &this->errors, &this->status);
+
+    //Check if there is something to read
+    if(this->status.cbInQue>0)
     {
-        //We're no longer connected
-        this->connected = false;
-        //Close the serial handler
-        CloseHandle(this->hSerial);
+        //If there is we check if there is enough data to read the required number
+        //of characters, if not we'll read only the available characters to prevent
+        //locking of the application.
+        if(this->status.cbInQue>nbChar)
+        {
+            toRead = nbChar;
+        }
+        else
+        {
+            toRead = this->status.cbInQue;
+        }
+
+        //Try to read the require number of chars, and return the number of read bytes on success
+        if(ReadFile(this->hSerial, buffer, toRead, &bytesRead, NULL) )
+        {
+            return bytesRead;
+        }
+
     }
+
+    //If nothing has been read, or that an error was detected return 0
+    return 0;
+
 }
 
 bool serialCom::writeData(char *buffer, unsigned int nbChar)

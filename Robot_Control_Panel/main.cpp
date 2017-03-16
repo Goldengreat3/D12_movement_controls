@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include <QApplication>
-#include "serialcom.cpp"
 #include <stdio.h>
 #include <tchar.h>
 #include <string>
@@ -15,9 +14,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    char* test;
-    test= (char*)("\\\\.\\COM1");
-
+    /*
     for(int i = 0; i < 1; i++)
     {
         try
@@ -29,6 +26,7 @@ int main(int argc, char *argv[])
             qDebug() << "COM" << i << " Didnt work";
         }
     }
+    */
 
     return a.exec();
 }

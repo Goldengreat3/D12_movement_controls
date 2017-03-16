@@ -1,11 +1,10 @@
 #include "mainwindow.h"
+#include "serialcom.cpp"
 #include "ui_mainwindow.h"
 #include <QMessageBox>
 #include <Qfile>
 #include <QThread>
 #include <QTimer>
-
-bool global_stall = false;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -38,12 +37,28 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->label_2->setText(RotationInputLimits);
     timer = new QTimer(this);
 
-
+    connected = Connect();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+bool MainWindow::Connect()
+{
+    char* test = (char*)("\\\\.\\COM3");
+    this->arduino->connect(test);
+
+    const char* buff = "WOOT WOOT";
+    unsigned int nbvar = strlen(buff);
+    while(true)
+    {
+        printf("%d\n",this->arduino->writeData((char*)buff, nbvar));
+        Sleep(1000);
+    }
+
+    return true;
 }
 
 void MainWindow::on_BaseExecute_clicked()
@@ -313,8 +328,6 @@ void MainWindow::Stall()
     blockSignals(true);
     ui->BaseExecute->hide();
     ui->BaseInput->setEnabled(false);
-    global_stall = true;
-
 }
 /*
 void MainWindow::Progress()
@@ -351,7 +364,6 @@ void MainWindow::unStall()
     blockSignals(false);
     ui->BaseExecute->show();
     ui->BaseInput->setEnabled(true);
-    global_stall = false;
 }
 
 void MainWindow::update()
