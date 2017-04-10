@@ -57,6 +57,7 @@ void MainWindow::write(double movement, char motor)
     buff[1] = 'F';
     buff[2] = 'F';
 
+<<<<<<< HEAD
     //Write motor to be moved
     buff[3] = motor;
 
@@ -100,10 +101,31 @@ bool MainWindow::Connect()
 {
     char* test = (char*)(CONNECTION_COM);
     return this->arduino->connect(test);
+=======
+    return true;
+}
+
+void MainWindow::write(const char* buf)
+{
+    const char* buff = "FFF1-200EEE";
+
+    unsigned int nbvar = strlen(buff);
+    this->arduino->writeData((char*)buff, nbvar);
+}
+
+void MainWindow::read()
+{
+    const char* buff = "poo                      ";
+    unsigned int nbvar = strlen(buff);
+    printf("%d\n",this->arduino->readData((char*)buff,nbvar));
+    printf("%s\n",buff);
+>>>>>>> df619737ef23715665c6acc8520e9f1b74126e61
 }
 
 void MainWindow::on_BaseExecute_clicked()
 {
+
+
     if(ui->BaseInput->value() != 0)
     {
         Check = 0;
@@ -116,8 +138,12 @@ void MainWindow::on_BaseExecute_clicked()
         }
         else
         {
+<<<<<<< HEAD
             write(ui->BaseInput->value(),BASE_MOTOR_VALUE);
 
+=======
+            write((const char*)ui->BaseInput->value());
+>>>>>>> df619737ef23715665c6acc8520e9f1b74126e61
             BaseValue = BaseValue + ui->BaseInput->value();
             ui->BaseLCD->display(BaseValue);
             ui->BaseInput->setValue(0);
@@ -128,6 +154,7 @@ void MainWindow::on_BaseExecute_clicked()
 
 void MainWindow::on_LowerJointExecute_clicked()
 {
+    read();
     if(ui->LowerJointInput->value() != 0)
     {
         Check = 0;

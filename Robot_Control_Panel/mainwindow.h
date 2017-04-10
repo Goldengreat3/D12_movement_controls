@@ -18,6 +18,8 @@ public:
 
     //Connects to the Arduino
     bool Connect();
+    void write(const char *buff);
+    void read();
 
     void write(double movement, char motor);
 
