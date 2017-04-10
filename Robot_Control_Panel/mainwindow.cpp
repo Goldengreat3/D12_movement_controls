@@ -6,6 +6,8 @@
 #include <QThread>
 #include <QTimer>
 
+#include "constants.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -29,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
     WristUDLowerLimit = -90;
     ExplorerLowerLimit = 0;
     ReelLowerLimit = 0;
-    MaxStep = '5';
+    MaxStep = MAX_STEP;
     Check = 0;
     RotationInputLimits += "Steps \n (1.8° Per Step)";
     RotationInputLimits += MaxStep;
@@ -45,20 +47,59 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-bool MainWindow::Connect()
+void MainWindow::write(double movement, char motor)
 {
-    char* test = (char*)("\\\\.\\COM3");
-    this->arduino->connect(test);
+    //Allocates the buffer
+    char* buff = new char[12];
 
-    const char* buff = "WOOT WOOT";
-    unsigned int nbvar = strlen(buff);
-    while(true)
+    //Creates the start code
+    buff[0] = 'F';
+    buff[1] = 'F';
+    buff[2] = 'F';
+
+    //Write motor to be moved
+    buff[3] = motor;
+
+    //Determines if moving in positive or negative direction
+    if(movement > 0)
     {
-        printf("%d\n",this->arduino->writeData((char*)buff, nbvar));
-        Sleep(1000);
+        buff[4] = '+';
+    }
+    else
+    {
+        buff[4] = '-';
+        movement = abs(movement);
     }
 
-    return true;
+    //Converts double to int
+    int m = static_cast<int>(movement);
+
+    //Adds movment value to buffer
+    buff[5] = (m/100) + '0';
+    buff[6] = ((m%100)/10) + '0';
+    buff[7] = (((m%100)%10)) + '0';
+
+    //Writes stop code
+    buff[8] = 'E';
+    buff[9] = 'E';
+    buff[10] = 'E';
+
+    //Writes NULL terminator
+    buff[11] = '\0';
+
+    printf("%s\n", buff);
+
+    //Sends out data
+    unsigned int nbvar = static_cast<unsigned int>(strlen(buff));
+    printf("%d\n",this->arduino->writeData((char*)buff, nbvar));
+
+    delete buff;
+}
+
+bool MainWindow::Connect()
+{
+    char* test = (char*)(CONNECTION_COM);
+    return this->arduino->connect(test);
 }
 
 void MainWindow::on_BaseExecute_clicked()
@@ -75,6 +116,8 @@ void MainWindow::on_BaseExecute_clicked()
         }
         else
         {
+            write(ui->BaseInput->value(),BASE_MOTOR_VALUE);
+
             BaseValue = BaseValue + ui->BaseInput->value();
             ui->BaseLCD->display(BaseValue);
             ui->BaseInput->setValue(0);
@@ -97,6 +140,8 @@ void MainWindow::on_LowerJointExecute_clicked()
         }
         else
         {
+            write(ui->LowerJointInput->value(),LOWERJ_MOTOR_VALUE);
+
             LowerJointValue = LowerJointValue + ui->LowerJointInput->value();
             ui->LowerJointLCD->display(LowerJointValue);
             ui->LowerJointInput->setValue(0);
@@ -122,6 +167,8 @@ void MainWindow::on_UpperJointExecute_clicked()
         }
         else
         {
+            write(ui->UpperJointInput->value(),UPPERJ_MOTOR_VALUE);
+
             UpperJointValue = UpperJointValue + ui->UpperJointInput->value();
             ui->UpperJointLCD->display(UpperJointValue);
             ui->UpperJointInput->setValue(0);
@@ -146,6 +193,8 @@ void MainWindow::on_WristLRExecute_clicked()
         }
         else
         {
+            write(ui->WristLRInput->value(),WRISTLR_MOTOR_VALUE);
+
             WristLRValue = WristLRValue + ui->WristLRInput->value();
             ui->WristLRLCD->display(WristLRValue);
             ui->WristLRInput->setValue(0);
@@ -170,6 +219,8 @@ void MainWindow::on_WristUDExecute_clicked()
         }
         else
         {
+            write(ui->WristUDInput->value(),WRISTUD_MOTOR_VALUE);
+
             WristUDValue = WristUDValue + ui->WristUDInput->value();
             ui->WristUDLCD->display(WristUDValue);
             ui->WristUDInput->setValue(0);
@@ -194,6 +245,8 @@ void MainWindow::on_ExplorerExecute_clicked()
         }
         else
         {
+            write(ui->ExplorerInput->value(),EXPLORER_MOTOR_VALUE);
+
             ExplorerValue = ExplorerValue + ui->ExplorerInput->value();
             ui->ExplorerLCD->display(ExplorerValue);
             ui->ExplorerInput->setValue(0);
@@ -217,6 +270,8 @@ void MainWindow::on_ReelExecute_clicked()
         }
         else
         {
+            write(ui->ReelInput->value(),REEL_MOTOR_VALUE);
+
             Check = 0;
             ReelValue = ReelValue + ui->ReelInput->value();
             ui->ReelLCD->display(ReelValue);
@@ -242,6 +297,9 @@ void MainWindow::on_CoordinatedExecute_clicked()
         }
         else
         {
+            write(ui->CoordinatedInput->value(),EXPLORER_MOTOR_VALUE);
+            write(ui->CoordinatedInput->value(),REEL_MOTOR_VALUE);
+
             ExplorerValue = ExplorerValue + ui->CoordinatedInput->value();
             ReelValue = ReelValue + ui->CoordinatedInput->value();
         }

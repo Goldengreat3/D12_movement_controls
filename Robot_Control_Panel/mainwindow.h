@@ -19,6 +19,8 @@ public:
     //Connects to the Arduino
     bool Connect();
 
+    void write(double movement, char motor);
+
 private slots:
     void on_BaseExecute_clicked();
 

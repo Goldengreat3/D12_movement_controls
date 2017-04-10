@@ -28,6 +28,7 @@ SOURCES += main.cpp\
     serialcom.cpp
 
 HEADERS  += mainwindow.h \
-    serialcom.h
+    serialcom.h \
+    constants.h
 
 FORMS    += mainwindow.ui
