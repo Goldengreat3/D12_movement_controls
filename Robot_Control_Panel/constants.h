@@ -7,7 +7,7 @@
 #define WRISTLR_MOTOR_VALUE         'D'
 #define WRISTUD_MOTOR_VALUE         'E'
 #define EXPLORER_MOTOR_VALUE        'F'
-#define REEL_MOTOR_VALUE            '0'
+#define REEL_MOTOR_VALUE            'G'
 
 #define MAX_STEP                    '5'
 #define DEGREES_PER_STEP            1.8
