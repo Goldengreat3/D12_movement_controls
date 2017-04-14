@@ -390,7 +390,7 @@ public:
         ExplorerProgressBar = new QProgressBar(Explorer);
         ExplorerProgressBar->setObjectName(QStringLiteral("ExplorerProgressBar"));
         ExplorerProgressBar->setGeometry(QRect(10, 240, 561, 23));
-        ExplorerProgressBar->setMaximum(10000);
+        ExplorerProgressBar->setMaximum(100);
         ExplorerProgressBar->setValue(0);
         tabWidget->addTab(Explorer, QString());
         MainWindow->setCentralWidget(centralWidget);
@@ -407,7 +407,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);

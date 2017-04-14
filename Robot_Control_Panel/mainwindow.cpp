@@ -57,7 +57,6 @@ void MainWindow::write(double movement, char motor)
     buff[1] = 'F';
     buff[2] = 'F';
 
-<<<<<<< HEAD
     //Write motor to be moved
     buff[3] = motor;
 
@@ -100,17 +99,8 @@ void MainWindow::write(double movement, char motor)
 bool MainWindow::Connect()
 {
     char* test = (char*)(CONNECTION_COM);
-    return this->arduino->connect(test);
-=======
-    return true;
-}
-
-void MainWindow::write(const char* buf)
-{
-    const char* buff = "FFF1-200EEE";
-
-    unsigned int nbvar = strlen(buff);
-    this->arduino->writeData((char*)buff, nbvar);
+    this->arduino->connect(test);
+    return (this->connected);
 }
 
 void MainWindow::read()
@@ -119,13 +109,10 @@ void MainWindow::read()
     unsigned int nbvar = strlen(buff);
     printf("%d\n",this->arduino->readData((char*)buff,nbvar));
     printf("%s\n",buff);
->>>>>>> df619737ef23715665c6acc8520e9f1b74126e61
 }
 
 void MainWindow::on_BaseExecute_clicked()
 {
-
-
     if(ui->BaseInput->value() != 0)
     {
         Check = 0;
@@ -138,17 +125,16 @@ void MainWindow::on_BaseExecute_clicked()
         }
         else
         {
-<<<<<<< HEAD
             write(ui->BaseInput->value(),BASE_MOTOR_VALUE);
+            //write((const char*)ui->BaseInput->value());
 
-=======
-            write((const char*)ui->BaseInput->value());
->>>>>>> df619737ef23715665c6acc8520e9f1b74126e61
             BaseValue = BaseValue + ui->BaseInput->value();
             ui->BaseLCD->display(BaseValue);
             ui->BaseInput->setValue(0);
+
+            ui->ArmProgressBar->setValue(0);
+            Progress();
         }
-        Progress();
     }
 }
 
@@ -279,7 +265,7 @@ void MainWindow::on_ExplorerExecute_clicked()
             ui->ExplorerInput->setValue(0);
 
             ui->ExplorerProgressBar->setValue(0);
-            Progress();
+            ProgressEx();
         }
     }
 }
@@ -305,7 +291,7 @@ void MainWindow::on_ReelExecute_clicked()
             ui->ReelInput->setValue(0);
 
             ui->ExplorerProgressBar->setValue(0);
-            Progress();
+            ProgressEx();
         }
     }
 }
@@ -337,20 +323,7 @@ void MainWindow::on_CoordinatedExecute_clicked()
         ui->CoordinatedInput->setValue(0);
 
         ui->ExplorerProgressBar->setValue(0);
-        Timer = 0;
-        for (Timer = 0; Timer <= 10000; Timer++)
-            ui->ExplorerProgressBar->setValue(Timer);
-        }
-        else
-        {
-                ui->ExplorerLCD->display(ExplorerValue);
-                ui->ReelLCD->display(ReelValue);
-                ui->CoordinatedInput->setValue(0);
-
-                ui->ExplorerProgressBar->setValue(0);
-                Timer = 0;
-                for (Timer = 0; Timer <= 10000; Timer++)
-                    ui->ExplorerProgressBar->setValue(Timer);
+        ProgressEx();
         }
     }
 }
@@ -439,6 +412,18 @@ void MainWindow::Progress()
     for(int i = 1; i < 101; i++)
     {
         ui->ArmProgressBar->setValue(i*1);
+        QThread::sleep(.2);
+    }
+    unStall();
+}
+
+void MainWindow::ProgressEx()
+{
+
+    Stall();
+    for(int i = 1; i < 101; i++)
+    {
+        ui->ExplorerProgressBar->setValue(i*1);
         QThread::sleep(.2);
     }
     unStall();

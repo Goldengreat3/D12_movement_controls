@@ -50,6 +50,7 @@ private slots:
     void unStall();
     void update();
     void Progress();
+    void ProgressEx();
 private:
     Ui::MainWindow *ui;
     double BaseValue;
